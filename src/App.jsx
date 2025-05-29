@@ -34,23 +34,63 @@ function App() {
 
 export default App*/
 
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/Login';
 import GlobeScreen from './components/GlobeScreen';
+import MemoryModal from './components/MemoryModal';
 
 function App() {
   const isLoggedIn = localStorage.getItem('user');
+  const [showMemoryModal, setShowMemoryModal] = useState(false);
+  const [memories, setMemories] = useState([]);
+
+  const handleMemorySubmit = (memoryData) => {
+    console.log('Memory submitted:', memoryData);
+    const newMemory = {
+      ...memoryData,
+      id: Date.now(),
+      timestamp: new Date().toISOString(),
+    };
+    setMemories(prev => [...prev, newMemory]);
+    setShowMemoryModal(false);
+  };
+
+  console.log('Current state:', { showMemoryModal, memories });
 
   return (
     <Router>
       <Routes>
-        <Route path="/" element={isLoggedIn ? <Navigate to="/globe" /> : <Login />} />
-        <Route path="/globe" element={<GlobeScreen />} />
+        <Route path="/" element={!isLoggedIn ? <Login /> : <Navigate to="/globe" />} />
+        <Route path="/globe" element={
+          isLoggedIn ? (
+            <>
+              <GlobeScreen 
+                showMemoryModal={showMemoryModal}
+                setShowMemoryModal={setShowMemoryModal}
+                memories={memories}
+                setMemories={setMemories}
+                onMemorySubmit={handleMemorySubmit}
+              />
+              {showMemoryModal && (
+                <MemoryModal 
+                  onClose={() => {
+                    console.log('Closing modal');
+                    setShowMemoryModal(false);
+                  }}
+                  onSubmit={handleMemorySubmit}
+                />
+              )}
+            </>
+          ) : (
+            <Navigate to="/" />
+          )
+        } />
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
 
