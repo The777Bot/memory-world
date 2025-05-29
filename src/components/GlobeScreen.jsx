@@ -40,9 +40,9 @@ function GlobeScreen({
 
     // Configure controls
     globeInstanceRef.current.controls().autoRotate = true;
-    globeInstanceRef.current.controls().autoRotateSpeed = 0.3;
+    globeInstanceRef.current.controls().autoRotateSpeed = 0.1;
     globeInstanceRef.current.controls().enableZoom = true;
-    globeInstanceRef.current.controls().minDistance = 200;
+    globeInstanceRef.current.controls().minDistance = 300;
     globeInstanceRef.current.controls().maxDistance = 500;
 
     // Set initial view
@@ -50,7 +50,9 @@ function GlobeScreen({
 
     // Add click handler for points
     globeInstanceRef.current.onPointClick((point) => {
+      console.log('Point clicked:', point);
       if (point.memory) {
+        console.log('Memory found:', point.memory);
         setSelectedMemory(point.memory);
       }
     });
@@ -82,7 +84,7 @@ function GlobeScreen({
           default: 'white',
         };
 
-        return {
+        const marker = {
           lat,
           lng,
           color: emotionColorMap[memory.emotion] || emotionColorMap.default,
@@ -93,11 +95,20 @@ function GlobeScreen({
             lng,
           },
         };
+
+        console.log('Created marker:', marker);
+        return marker;
       });
 
+      console.log('Setting markers:', markers);
       globeInstanceRef.current.pointsData(markers);
     }
   }, [memories]);
+
+  // Debug log for selected memory
+  useEffect(() => {
+    console.log('Selected memory changed:', selectedMemory);
+  }, [selectedMemory]);
 
   return (
     <div style={{ 
@@ -154,7 +165,7 @@ function GlobeScreen({
           right: '20px',
           backgroundColor: '#2563eb',
           color: 'white',
-          padding: '12px 24px',
+          padding: '10px 20px',
           borderRadius: '8px',
           zIndex: 2,
           border: 'none',

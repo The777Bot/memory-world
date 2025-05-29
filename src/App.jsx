@@ -52,11 +52,19 @@ function App() {
       id: Date.now(),
       timestamp: new Date().toISOString(),
     };
-    setMemories(prev => [...prev, newMemory]);
+    console.log('New memory created:', newMemory);
+    setMemories(prev => {
+      const updatedMemories = [...prev, newMemory];
+      console.log('Updated memories array:', updatedMemories);
+      return updatedMemories;
+    });
     setShowMemoryModal(false);
   };
 
-  console.log('Current state:', { showMemoryModal, memories });
+  // Debug log for memories
+  React.useEffect(() => {
+    console.log('Memories state updated:', memories);
+  }, [memories]);
 
   return (
     <Router>

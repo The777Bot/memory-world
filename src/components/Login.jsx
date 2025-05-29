@@ -22,7 +22,11 @@ function Login() {
       />
       <button
         onClick={handleLogin}
+        style={{
+            cursor: 'pointer'
+        }}
         className="px-6 py-2 bg-green-600 rounded hover:bg-green-700 transition"
+        
       >
         Enter
       </button>

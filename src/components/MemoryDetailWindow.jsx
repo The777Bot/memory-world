@@ -14,32 +14,91 @@ function MemoryDetailWindow({ memory, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 w-96 max-h-[80vh] overflow-y-auto">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold flex items-center gap-2">
+    <div style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(255, 255, 255, 0.2)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 50
+    }}>
+      <div style={{
+        backgroundColor: 'white',
+        borderRadius: '8px',
+        padding: '22px',
+        width: '380px',
+        maxHeight: '80vh',
+        overflowY: 'auto'
+      }}>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: '6px'
+        }}>
+          <h2 style={{
+            fontSize: '1.25rem',
+            color: 'black',
+            fontWeight: 'bold',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
+          }}>
             {emotionEmojis[memory.emotion]} Memory
           </h2>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
+            style={{
+              color: '#000000',
+              borderRadius:'3px',
+              backgroundColor: '#f52727',
+              background: 'none',
+              border: 'red',
+              cursor: 'pointer',
+              fontSize: '1.25rem'
+            }}
           >
             ✕
           </button>
         </div>
         
-        <div className="space-y-4">
-          <div className="bg-gray-50 p-4 rounded-lg">
-            <p className="text-gray-800 whitespace-pre-wrap">{memory.text}</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div style={{
+            backgroundColor: '#f9fafb',
+            padding: '16px',
+            borderRadius: '8px'
+          }}>
+            <p style={{
+              color: '#1f2937',
+              whiteSpace: 'pre-wrap'
+            }}>
+              {memory.text}
+            </p>
           </div>
           
-          <div className="flex items-center gap-2 text-sm text-gray-600">
-            <span className="font-medium">Emotion:</span>
-            <span className="capitalize">{memory.emotion}</span>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            fontSize: '0.875rem',
+            color: '#4b5563'
+          }}>
+            <span style={{ fontWeight: 500 }}>Emotion:</span>
+            <span style={{ textTransform: 'capitalize' }}>{memory.emotion}</span>
           </div>
           
-          <div className="flex items-center gap-2 text-sm text-gray-600">
-            <span className="font-medium">Location:</span>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            fontSize: '0.875rem',
+            color: '#4b5563'
+          }}>
+            <span style={{ fontWeight: 500 }}>Location:</span>
             <span>{memory.lat.toFixed(2)}°, {memory.lng.toFixed(2)}°</span>
           </div>
         </div>

@@ -17,18 +17,18 @@ function MemoryModal({ onClose, onSubmit }) {
       left: 0,
       right: 0,
       bottom: 0,
-      backgroundColor: 'rgba(0, 0, 0, 0.7)',
+      backgroundColor: 'rgba(255, 255, 255, 0.1)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       zIndex: 50
     }}>
       <div style={{
-        backgroundColor: 'white',
+        backgroundColor: 'black',
         padding: '24px',
-        borderRadius: '8px',
-        width: '320px',
-        color: 'black'
+        borderRadius: '4px',
+        width: '350px',
+        color: 'white'
       }}>
         <h2 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>🧠 Add Memory</h2>
         <textarea
@@ -39,6 +39,7 @@ function MemoryModal({ onClose, onSubmit }) {
           style={{
             width: '100%',
             padding: '8px',
+            marginLeft: '-4px',
             marginBottom: '12px',
             border: '1px solid #ccc',
             borderRadius: '4px',
@@ -54,6 +55,7 @@ function MemoryModal({ onClose, onSubmit }) {
             marginBottom: '12px',
             border: '1px solid #ccc',
             borderRadius: '4px'
+            
           }}
         >
           <option value="love">❤️ Love</option>
